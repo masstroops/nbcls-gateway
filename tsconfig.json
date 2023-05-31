@@ -1,0 +1,34 @@
+// vue（typescript）项目在vs中打开出现的各种问题 https://blog.csdn.net/qianOye/article/details/130751289
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "paths": {
+      //Direct
+      //Sub Locations
+      "@/*":["*"],
+      "@components/*":["components/*"],
+      "@pages/*":["pages/*"],
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "vite.config.*"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
