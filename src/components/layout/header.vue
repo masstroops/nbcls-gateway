@@ -15,13 +15,25 @@
       <div class="absolute right-0 bottom-0 w-[109px] h-[64px] px-[15px] text-white font-semibold text-[18px] leading-[64px] cursor-pointer">
         <img class="w-[33px] h-[33px] mr-[10px] inline" src="@/assets/img/usericon.png" alt="">登录
       </div>
+
+      <span class="text-white">{{ token }}</span> <button @click="login" class="text-white">{{token?'退出':'登录'}}</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from '@/store/user';
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+
+const userStore = useUserStore()
+const { setToken, setUserInfo, logout } = userStore
+const { token } = storeToRefs(userStore)
+const login = () => {
+  if (token.value) logout()
+  else setToken('123')
+}
 
 const router = useRouter()
 const links = ref([

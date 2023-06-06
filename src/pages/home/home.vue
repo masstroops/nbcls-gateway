@@ -15,9 +15,12 @@
       </div>
     </div>
   </div>
+  
+  <span>{{ userStore.token }}</span>
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from '@/store/user';
 import { ref } from 'vue';
 
 const insList = ref([
@@ -26,6 +29,9 @@ const insList = ref([
   {name: '生物滴滤装置', code: ''},
   {name: '生物滴滤装置', code: ''},
 ])
+
+const userStore = useUserStore()
+
 </script>
 
 <style lang="less" scoped>
