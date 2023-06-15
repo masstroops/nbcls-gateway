@@ -7,7 +7,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base:"./",
+  base: process.env.NODE_ENV === "development" ? "./" : "/",
   resolve:{
     alias:{
       //Two methods available
@@ -23,6 +23,15 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+      }
+    }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://124.220.161.239:8989',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       }
     }
   }

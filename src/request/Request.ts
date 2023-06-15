@@ -38,7 +38,13 @@ export default class Request {
     return this._instance.request(config)
   }
 
-  public get<T = any>(url: string, config?: ExpandAxiosRequestConfig): Promise<T> {
+  // public get<T = any>(url: string, config?: ExpandAxiosRequestConfig): Promise<T> {
+  //   return this._instance.get(url, config)
+  // }
+
+  public get<T = any>(url: string, params?: any, config?: ExpandAxiosRequestConfig): Promise<T> {
+    config = Object.assign(this._defaultConfig, config)
+    config.params = params
     return this._instance.get(url, config)
   }
 

@@ -17,7 +17,7 @@ export const transform: InterceptorHooks = {
     // 因为 axios 返回不支持扩展自定义配置，需要自己断言一下
     const res = result as ExpandAxiosResponse
     // 与后端约定的请求成功码
-    const SUCCESS_CODE = 1
+    const SUCCESS_CODE = 200
     if (res.status !== 200) return Promise.reject(res)
     if (res.data.code !== SUCCESS_CODE) {
       if (res.config.requestOptions?.globalErrorMessage) {
@@ -31,7 +31,7 @@ export const transform: InterceptorHooks = {
       console.log(res.data.message)
     }
     // 请求返回值，建议将 返回值 进行解构
-    return res.data.result
+    return res.data
   },
   responseInterceptorCatch(err) {
     // 这里用来处理 http 常见错误，进行全局提示

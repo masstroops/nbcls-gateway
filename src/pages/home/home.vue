@@ -20,6 +20,7 @@
 </template>
 
 <script setup lang="ts">
+import { getNewsList } from '@/api/news';
 import { useUserStore } from '@/store/user';
 import { ref } from 'vue';
 
@@ -31,6 +32,15 @@ const insList = ref([
 ])
 
 const userStore = useUserStore()
+
+let params = {
+  pageNum: 1,
+  pageSize: 3,
+  type: 1
+}
+getNewsList(params).then(res => {
+  console.log(res);
+})
 
 </script>
 

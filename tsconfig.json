@@ -17,9 +17,10 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false, // 禁用对未使用局部变量的警告。
+    "noUnusedParameters": false, // 禁用对未使用函数参数的警告。
     "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true, // 关闭export =
 
     "paths": {
       //Direct

@@ -10,25 +10,29 @@ const request = new Request({
 
 export default request
 
-interface ResModel {
-  str: string
-  num: number
+export const download = (url: string, params: any) => {
+  return request.get(url, params, { responseType: 'blob' })
 }
-// 发起请求
-request
-  .post<ResModel>(
-    '/abc',
-    {
-      a: 'aa',
-      b: 'bb',
-    },
-    {
-      requestOptions: {
-        globalErrorMessage: true,
-      },
-    }
-  )
-  .then((res) => {
-    console.log('res: ', res)
-    console.log(res.str)
-  })
+
+// interface ResModel {
+//   str: string
+//   num: number
+// }
+// // 发起请求
+// request
+//   .post<ResModel>(
+//     '/abc',
+//     {
+//       a: 'aa',
+//       b: 'bb',
+//     },
+//     {
+//       requestOptions: {
+//         globalErrorMessage: true,
+//       },
+//     }
+//   )
+//   .then((res) => {
+//     console.log('res: ', res)
+//     console.log(res.str)
+//   })
