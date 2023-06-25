@@ -17,4 +17,4 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-## [项目构建参考](https://www.cnblogs.com/hechunfeng/p/17249626.html)
+## [项目构建参考](https://www.cnblogs.com/hechunfeng/p/17249626.html) [svg](https://blog.csdn.net/m0_38134431/article/details/125508459)

@@ -12,6 +12,7 @@ const _routes:Array<Router.RouteRecordRaw> = [
     path: "/",
     redirect: '/home'
   },
+  
   {
     path: "/g1",
     component: Layout,//Lazy Loading to defer loading only when required

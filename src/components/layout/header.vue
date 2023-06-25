@@ -1,22 +1,17 @@
 <template>
   <div class="header">
-    <div class="w-[1200px] h-full relative mx-auto">
-      <div class="flex justify-between h-[95px] mb-[35px]">
-        <img class="w-[296px] h-[67px]" src="@/assets/img/nimtelogo.png" alt="">
-        <div class="flex">
-          <div @click="goto(item)" v-for="item in links" :class="{'link': true, 'linkActive': active === item.name}">{{ item.name }}</div>
-        </div>
+    <div class="header_con w-[1200px] h-full mx-auto flex justify-between items-center">
+      <img src="@/assets/img/nimtelogo.png" alt="" class="w-[496px] ">
+      <div class="w-[400px] h-[40px] border-2 border-[#122c67] border-solid">
+        <input v-model="insName" type="text" class="leading-[36px] px-[12px] py-[6px] h-[36px] text-[16px] outline-0 w-[346px]" placeholder="请输入仪器名称">
+        <SvgIcon @click="search" name="search" class="inline-block w-[50px] h-[36px] p-[8px] text-[#122c67] cursor-pointer" />
+        <!-- <button class="w-[132px] h-[60px] text-white font-semibold text-[20px] bg-[#F1960D] hover:bg-[#da8709]">搜索</button> -->
       </div>
-      <h1 class="text-[30px] text-[#fff] font-semibold letter4">科研大仪设备开放共享平台</h1>
-      <div class="mt-[28px]">
-        <input v-model="insName" type="text" class="hInput w-[528px] h-[60px] bg-[#fff] text-[18px]" placeholder="请输入仪器名称">
-        <button @click="search" class="w-[132px] h-[60px] text-white font-semibold text-[20px] bg-[#F1960D] hover:bg-[#da8709]">搜索</button>
-      </div>
-      <div class="absolute right-0 bottom-0 w-[109px] h-[64px] px-[15px] text-white font-semibold text-[18px] leading-[64px] cursor-pointer">
-        <img class="w-[33px] h-[33px] mr-[10px] inline" src="@/assets/img/usericon.png" alt="">登录
-      </div>
-
-      <span class="text-white">{{ token }}</span> <button @click="login" class="text-white">{{token?'退出':'登录'}}</button>
+    </div>
+  </div>
+  <div class="h-[60px] bg-[#122c67]">
+    <div class="flex w-[1200px] mx-auto h-full text-white leading-[60px]">
+      <div @click="goto(item)" v-for="item in links" :class="{'link': true, 'linkActive': active === item.name}">{{ item.name }}</div>
     </div>
   </div>
 </template>
@@ -56,35 +51,18 @@ const search = () => {
 
 <style lang="less" scoped>
 .header {
-  height: 478px;
-  padding-top: 50px;
-  background: url(../../assets/img/2112221135383059261.png) no-repeat center;
-  background-size: cover;
-}
-.link {
-  width: 93px;
-  height: 80px;
-  border-bottom: 4px solid transparent;
-  text-align: center;
-  line-height: 80px;
-  font-size: 20px;
-  transition: .2s;
-  font-weight: 700;
-  margin-left: 22px;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    border-color: #fff;
+  height: 140px;
+  .header_con {
+    background: url(@/assets/img/bg-header.png) no-repeat right bottom;
   }
 }
-.linkActive {
-  border-color: #fff;
-}
-.letter4 {
-  letter-spacing: 4px;
-}
-.hInput {
-  text-indent: 18px;
-  outline: 0;
+.link {
+  padding: 0 40px;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: #092054;
+  }
 }
 </style>

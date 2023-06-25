@@ -3,10 +3,17 @@ import vue from '@vitejs/plugin-vue'
 //Install node types before calling below import
 import { fileURLToPath } from "url"
 import path from 'path'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(__dirname, 'src/assets/svg')],
+      symbolId: 'icon-[dir]-[name]'
+    })
+  ],
   base: process.env.NODE_ENV === "development" ? "./" : "/",
   resolve:{
     alias:{
