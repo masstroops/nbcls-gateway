@@ -4,7 +4,8 @@ import App from './App.vue'
 import router from './routers'
 import { createPinia } from 'pinia'
 import 'virtual:svg-icons-register'
-import 'ant-design-vue/dist/antd.css'
+import 'ant-design-vue/dist/antd.less'
+
 // import SvgIcon from '@/components/SvgIcon.vue'
 
 const app = createApp(App)

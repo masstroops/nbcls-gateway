@@ -34,6 +34,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
+        modifyVars: {
+          hack: `true; @import "${path.resolve(__dirname, 'src/theme.less')}";`,
+        },
         javascriptEnabled: true,
       }
     }

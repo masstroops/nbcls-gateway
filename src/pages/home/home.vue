@@ -15,6 +15,13 @@
         <news />
         <notices />
       </div>
+      <div>
+        <statistics />
+      </div>
+      <div class="mb-[50px] flex justify-between">
+        <hots />
+        <links />
+      </div>
     </div>
   </div>
 
@@ -27,6 +34,9 @@ import { useUserStore } from '@/store/user'
 import { ref } from 'vue'
 import news from './news.vue'
 import notices from './notices.vue'
+import statistics from './statistics.vue'
+import hots from './hots.vue'
+import links from './links.vue'
 
 const insList = ref([
   {name: '生物滴滤装置', code: ''},

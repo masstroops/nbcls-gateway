@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ACarousel: typeof import('ant-design-vue/es')['Carousel']
+    ATabPane: typeof import('ant-design-vue/es')['TabPane']
+    ATabs: typeof import('ant-design-vue/es')['Tabs']
     copy: typeof import('./src/components/layout/header copy.vue')['default']
     Header: typeof import('./src/components/layout/header.vue')['default']
     'Header copy': typeof import('./src/components/layout/header copy.vue')['default']
