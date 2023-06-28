@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './routers'
 import { createPinia } from 'pinia'
 import 'virtual:svg-icons-register'
-import 'ant-design-vue/dist/antd.less'
+import './theme.less'
 
 // import SvgIcon from '@/components/SvgIcon.vue'
 

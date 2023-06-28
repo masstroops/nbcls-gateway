@@ -7,10 +7,21 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
+    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
+    AButton: typeof import('ant-design-vue/es')['Button']
     ACarousel: typeof import('ant-design-vue/es')['Carousel']
+    AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
+    AInput: typeof import('ant-design-vue/es')['Input']
+    APagination: typeof import('ant-design-vue/es')['Pagination']
+    ASelect: typeof import('ant-design-vue/es')['Select']
+    ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
+    ATag: typeof import('ant-design-vue/es')['Tag']
+    BreadcrumbNav: typeof import('./src/components/breadcrumbNav.vue')['default']
     copy: typeof import('./src/components/layout/header copy.vue')['default']
+    Footer: typeof import('./src/components/layout/footer.vue')['default']
     Header: typeof import('./src/components/layout/header.vue')['default']
     'Header copy': typeof import('./src/components/layout/header copy.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']

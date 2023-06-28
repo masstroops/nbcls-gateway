@@ -16,7 +16,7 @@ export default defineConfig({
       symbolId: 'icon-[dir]-[name]'
     }),
     Components({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver({ importStyle: false })], // --ant-primary-color这些颜色都改变了，但是又被替代了，是自动导入插件的原因，在vite.config.ts中的自动导入加入importStyle: false即可
     }),
   ],
   base: process.env.NODE_ENV === "development" ? "./" : "/",
@@ -34,10 +34,13 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        modifyVars: {
-          hack: `true; @import "${path.resolve(__dirname, 'src/theme.less')}";`,
-        },
+        charset: false,
         javascriptEnabled: true,
+        modifyVars: {
+          // hack: `true; @import "${path.resolve(__dirname, 'src/theme.less')}";`,
+          // '@primary-color': '#122C67',
+          // '@link-color': '#122C67',
+        },
       }
     }
   },

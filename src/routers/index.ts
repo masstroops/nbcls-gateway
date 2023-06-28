@@ -22,22 +22,29 @@ const _routes:Array<Router.RouteRecordRaw> = [
       {
         path: '/home',
         component: Home,
-        name: 'home'
-      }
-    ]
-  },
-  {
-    path: "/g2", //need to change with regex to catch all non-defined
-    component: Layout,
-    name: "g2",
-    children: [
+        name: 'home',
+        meta: { title: '首页' }
+      },
       {
         path: '/instrument',
         component: () => import('@pages/instrument/instrument.vue'),
-        name: 'instrument'
-      }
+        name: 'instrument',
+        meta: { title: '仪器列表' }
+      },
     ]
   },
+  // {
+  //   path: "/g2", //need to change with regex to catch all non-defined
+  //   component: Layout,
+  //   name: "g2",
+  //   children: [
+  //     {
+  //       path: '/instrument',
+  //       component: () => import('@pages/instrument/instrument.vue'),
+  //       name: 'instrument'
+  //     }
+  //   ]
+  // },
 ];
 
 
