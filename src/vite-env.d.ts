@@ -4,3 +4,6 @@
 //   const component: DefineComponent<{}, {}, any>
 //   export default component
 // }
+
+
+declare const AMap: any;

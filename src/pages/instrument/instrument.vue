@@ -2,10 +2,16 @@
   <breadcrumbNav />
   <div class="w-[1200px] mx-auto flex justify-between py-[40px]">
     <div class="w-[800px]">
+      <template v-if="loading">
+        <div v-for="i in new Array(3).fill(0)" class="flex items-center mb-[30px]">
+          <a-skeleton-image class="!w-[160px] pl-[20px]" />
+          <a-skeleton class="flex-1" />
+        </div>
+      </template>
       <div v-for="item in list" class="pb-[30px] mb-[30px] border-b border-dashed border-[#ddd] flex">
         <img :src="item.img" class="w-[140px] h-[140px]" alt="">
         <div class="ml-[30px] flex-1">
-          <h3 class="text-[20px] line-clamp-1 mb-[30px] cursor-pointer"><a-tag>{{ item.state }}</a-tag><span class="font-bold">{{ item.name }}</span></h3>
+          <h3 @click="goDetail(item)" class="text-[20px] line-clamp-1 mb-[30px] cursor-pointer"><a-tag>{{ item.state }}</a-tag><span class="font-bold">{{ item.name }}</span></h3>
           <div class="flex flex-wrap text-[16px] text-[#666] leading-[20px]">
             <div class="w-1/2 mb-[10px]">仪器分类：{{ item.yqfl }}</div>
             <div class="w-1/2 mb-[10px]">使用模式：{{ item.syms }}</div>
@@ -41,6 +47,7 @@
 <script setup lang="ts">
 import breadcrumbNav from '@/components/breadcrumbNav.vue'
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const deptValue = ref<any>()
 const nameValue = ref('')
@@ -49,11 +56,13 @@ const search = () => {
   getList()
 }
 
+const loading = ref(false)
 const current = ref(1)
 const pageSize = ref(3)
 const total = ref(99)
 const list = ref<any[]>([])
 const getList = async() => {
+  loading.value = true
   let img = (await import('@/assets/img/ts6.jpg')).default
   list.value = new Array(3).fill(0).map((item:any, i:any) => {
     return {
@@ -67,12 +76,19 @@ const getList = async() => {
       ssjg: '化学化工学院',
     }
   })
+  loading.value = false
 }
 getList()
 const onTableChange = (page:any) => {
   console.log(page);
 }
 
+const router = useRouter()
+const goDetail = (row:any) => {
+  console.log(router);
+  
+  router.push({ name: 'instrumentDetail', query: {} })
+}
 
 </script>
 

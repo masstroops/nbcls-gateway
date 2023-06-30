@@ -1,6 +1,5 @@
 // import { createRouter, createWebHistory } from 'vue-router'
 import * as Router from 'vue-router'
-import Home from '@pages/home/home.vue'
 import Layout from '@components/layout/layout.vue'
 
 
@@ -21,7 +20,7 @@ const _routes:Array<Router.RouteRecordRaw> = [
     children: [
       {
         path: '/home',
-        component: Home,
+        component: () => import('@pages/home/home.vue'),
         name: 'home',
         meta: { title: '首页' }
       },
@@ -29,7 +28,49 @@ const _routes:Array<Router.RouteRecordRaw> = [
         path: '/instrument',
         component: () => import('@pages/instrument/instrument.vue'),
         name: 'instrument',
-        meta: { title: '仪器列表' }
+        meta: { title: '仪器列表' },
+      },
+      {
+        path: '/instrument/detail',
+        component: () => import('@pages/instrument/detail.vue'),
+        name: 'instrumentDetail',
+        meta: { title: '仪器列表' },
+      },
+      {
+        path: '/rules',
+        component: () => import('@pages/rules/rules.vue'),
+        name: 'rules',
+        meta: { title: '规章制度' }
+      },
+      {
+        path: '/rules/detail',
+        component: () => import('@pages/rules/detail.vue'),
+        name: 'rulesDetail',
+        meta: { title: '规章制度' }
+      },
+      {
+        path: '/news',
+        component: () => import('@pages/news/news.vue'),
+        name: 'news',
+        meta: { title: '新闻动态' }
+      },
+      {
+        path: '/trainning',
+        component: () => import('@pages/trainning/trainning.vue'),
+        name: 'trainning',
+        meta: { title: '培训讲座' }
+      },
+      {
+        path: '/introduction',
+        component: () => import('@pages/introduction/introduction.vue'),
+        name: 'introduction',
+        meta: { title: '平台简介' }
+      },
+      {
+        path: '/contact',
+        component: () => import('@pages/contact/contact.vue'),
+        name: 'contact',
+        meta: { title: '联系方式' }
       },
     ]
   },

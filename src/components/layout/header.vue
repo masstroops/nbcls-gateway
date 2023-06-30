@@ -34,6 +34,11 @@ const router = useRouter()
 const links = ref([
   {name: '首页', url: '/home'},
   {name: '开放仪器', url: '/instrument'},
+  {name: '规章制度', url: '/rules'},
+  {name: '新闻动态', url: '/news'},
+  {name: '培训讲座', url: '/trainning'},
+  {name: '平台简介', url: '/introduction'},
+  {name: '联系方式', url: '/contact'},
 ])
 
 const active = ref('首页')
