@@ -55,9 +55,21 @@ const _routes:Array<Router.RouteRecordRaw> = [
         meta: { title: '新闻动态' }
       },
       {
+        path: '/news/detail',
+        component: () => import('@pages/news/detail.vue'),
+        name: 'newsDetail',
+        meta: { title: '新闻动态' }
+      },
+      {
         path: '/trainning',
         component: () => import('@pages/trainning/trainning.vue'),
         name: 'trainning',
+        meta: { title: '培训讲座' }
+      },
+      {
+        path: '/trainning/detail',
+        component: () => import('@pages/trainning/detail.vue'),
+        name: 'trainningDetail',
         meta: { title: '培训讲座' }
       },
       {

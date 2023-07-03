@@ -1,5 +1,5 @@
 <template>
-  <Content :reqFun="getList" />
+  <Content :reqFun="getList" path="noticeDetail" />
 
   <div>
 

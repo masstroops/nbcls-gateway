@@ -23,6 +23,7 @@ declare module 'vue' {
     ATag: typeof import('ant-design-vue/es')['Tag']
     BreadcrumbNav: typeof import('./src/components/breadcrumbNav.vue')['default']
     Content: typeof import('./src/components/content.vue')['default']
+    ContentDetail: typeof import('./src/components/contentDetail.vue')['default']
     copy: typeof import('./src/components/layout/header copy.vue')['default']
     Footer: typeof import('./src/components/layout/footer.vue')['default']
     Header: typeof import('./src/components/layout/header.vue')['default']
