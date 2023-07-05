@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header_con w-[1200px] h-full mx-auto flex justify-between items-center">
-      <img src="@/assets/img/nimtelogo.png" alt="" class="w-[496px] ">
+      <img src="@/assets/img/nimtelogo.png" alt="" class="w-[756px] ">
       <div class="w-[400px] h-[40px] border-2 border-[#122c67] border-solid">
         <input v-model="insName" type="text" class="leading-[36px] px-[12px] py-[6px] h-[36px] text-[16px] outline-0 w-[346px]" placeholder="请输入仪器名称">
         <SvgIcon @click="search" name="search" class="inline-block w-[50px] h-[36px] p-[8px] text-[#122c67] cursor-pointer" />
@@ -39,6 +39,7 @@ const links = ref([
   {name: '培训讲座', url: '/trainning'},
   {name: '平台简介', url: '/introduction'},
   {name: '联系方式', url: '/contact'},
+  {name: '预约入口', url: '/login'},
 ])
 
 const active = ref('首页')

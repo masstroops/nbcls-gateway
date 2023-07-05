@@ -84,6 +84,12 @@ const _routes:Array<Router.RouteRecordRaw> = [
         name: 'contact',
         meta: { title: '联系方式' }
       },
+      {
+        path: '/login',
+        component: () => import('@pages/login/login.vue'),
+        name: 'login',
+        meta: { title: '预约入口' }
+      },
     ]
   },
   // {

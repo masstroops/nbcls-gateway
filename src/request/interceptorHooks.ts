@@ -3,7 +3,7 @@ import { InterceptorHooks, ExpandAxiosResponse } from './types'
 export const transform: InterceptorHooks = {
   requestInterceptor(config) {
     // 请求头部处理，如添加 token
-    const token = 'token-value'
+    const token = ''
     if (token) {
       config!.headers!.Authorization = token
     }
