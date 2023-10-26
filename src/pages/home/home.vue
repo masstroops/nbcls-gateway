@@ -17,15 +17,18 @@
   <div class="py-[40px]">
     <div class="w-[1200px] mx-auto">
       <div class="mb-[50px] flex justify-between">
-        <news />
         <notices />
+        <news />
       </div>
-      <div>
-        <statistics />
+      <div class="mb-[50px] flex justify-between">
+        <!-- <statistics /> -->
+        <tjNotice />
+        <login />
       </div>
       <div class="mb-[50px] flex justify-between">
         <hots />
-        <links />
+        <!-- <links /> -->
+        <insSearch />
       </div>
     </div>
   </div>
@@ -42,6 +45,9 @@ import notices from './notices.vue'
 import statistics from './statistics.vue'
 import hots from './hots.vue'
 import links from './links.vue'
+import tjNotice from './tjNotice.vue'
+import login from './login.vue'
+import insSearch from './insSearch.vue'
 
 const insList = ref([
   {name: '生物滴滤装置', code: ''},
@@ -51,8 +57,8 @@ const insList = ref([
 ])
 
 const banners:any[] = [
-  {url: 'https://www.nimte.ac.cn/news/news/202305/W020230626338838407729.jpg', title: '宁波材料所在Janus气凝胶实现季节适应性热管理温度调节方面取得新进展', content: '钙钛矿以其长的载流子扩散长度、长的载流子复合寿命和宽的吸收范围，已经成为低成本和高性能太阳能电池的潜在材料。经过十多年的发展，单结钙钛矿太阳能电池的光电转换效率已提高至25%以上，为太阳能电池产业的升级转型提供了新途径。因倒置平板结构器件具有可低温制备、可忽略的迟滞效应、高稳定性的特性，并可以制备成叠层电池，所以其备受重视。然而由于钙钛矿材料的多晶性和离子特性，钙钛矿中存在大量导致离子迁移和载流子非辐射复合的缺陷，且缺陷是水/氧渗透的主要通道，会显著降低钙钛矿薄膜甚至器件的稳定性。'},
   {url: 'https://www.nimte.ac.cn/news/news/202305/W020230626338835879272.jpg', title: '宁波材料所党委召开会议专题研究分支机构清理整改“回头看”', content: '钙钛矿以其长的载流子扩散长度、长的载流子复合寿命和宽的吸收范围，已经成为低成本和高性能太阳能电池的潜在材料。经过十多年的发展，单结钙钛矿太阳能电池的光电转换效率已提高至25%以上，为太阳能电池产业的升级转型提供了新途径。因倒置平板结构器件具有可低温制备、可忽略的迟滞效应、高稳定性的特性，并可以制备成叠层电池，所以其备受重视。然而由于钙钛矿材料的多晶性和离子特性，钙钛矿中存在大量导致离子迁移和载流子非辐射复合的缺陷，且缺陷是水/氧渗透的主要通道，会显著降低钙钛矿薄膜甚至器件的稳定性。'},
+  {url: 'https://www.nimte.ac.cn/news/news/202309/W020230926385656005749.jpg', title: '宁波材料所氢能实验室正式揭牌并召开学术委员会会议', content: '钙钛矿以其长的载流子扩散长度、长的载流子复合寿命和宽的吸收范围，已经成为低成本和高性能太阳能电池的潜在材料。经过十多年的发展，单结钙钛矿太阳能电池的光电转换效率已提高至25%以上，为太阳能电池产业的升级转型提供了新途径。因倒置平板结构器件具有可低温制备、可忽略的迟滞效应、高稳定性的特性，并可以制备成叠层电池，所以其备受重视。然而由于钙钛矿材料的多晶性和离子特性，钙钛矿中存在大量导致离子迁移和载流子非辐射复合的缺陷，且缺陷是水/氧渗透的主要通道，会显著降低钙钛矿薄膜甚至器件的稳定性。'},
 ]
 
 const userStore = useUserStore()

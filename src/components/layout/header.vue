@@ -38,6 +38,7 @@ const links = ref([
   {name: '新闻动态', url: '/news'},
   {name: '培训讲座', url: '/trainning'},
   {name: '平台简介', url: '/introduction'},
+  {name: '一问一答', url: '/QandA'},
   {name: '联系方式', url: '/contact'},
   {name: '预约入口', url: '/login'},
 ])
@@ -63,7 +64,7 @@ const search = () => {
   }
 }
 .link {
-  padding: 0 40px;
+  padding: 0 32px;
   font-size: 18px;
   text-align: center;
   cursor: pointer;

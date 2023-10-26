@@ -79,6 +79,18 @@ const _routes:Array<Router.RouteRecordRaw> = [
         meta: { title: '平台简介' }
       },
       {
+        path: '/QandA',
+        component: () => import('@pages/QandA/QandA.vue'),
+        name: 'QandA',
+        meta: { title: '一问一答' }
+      },
+      {
+        path: '/QandA/detail',
+        component: () => import('@pages/QandA/detail.vue'),
+        name: 'QandADetail',
+        meta: { title: '一问一答' }
+      },
+      {
         path: '/contact',
         component: () => import('@pages/contact/contact.vue'),
         name: 'contact',
