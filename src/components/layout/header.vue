@@ -51,7 +51,7 @@ const goto = (val: any) => {
 
 const insName = ref('')
 const search = () => {
-  router.push({ path: '/instrument', query: { name: insName.value } })
+  router.push({ path: '/instrument', query: { params:JSON.stringify({assetName: insName.value}) } })
 }
 
 </script>

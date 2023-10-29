@@ -131,7 +131,7 @@ const formState = reactive<any>({
   password: '',
 })
 const submit = () => {
-  form.value.validateFields().then((values) => {
+  form.value.validateFields().then((values:any) => {
     console.log(values);
     
   }).catch()

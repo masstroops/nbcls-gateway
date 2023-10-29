@@ -3,10 +3,10 @@
   <div class="w-[1200px] my-[40px] mx-auto">
     <a-skeleton :loading="loading">
       <div class="pb-[30px] mb-[30px] border-b border-dashed border-[#ddd]">
-        <h1 class="text-[30px] font-bold leading-[40px]">{{ info.title }}</h1>
+        <h1 class="text-[30px] font-bold leading-[40px]">{{ info.headline }}</h1>
         <div class="mt-[15px] text-[16px] text-[#999]">
-          <span class="mr-[30px]">{{ info.source }}</span>
-          <span>{{ info.date }}</span>
+          <span class="mr-[30px]">{{ info.contentText }}</span>
+          <span>{{ info.addTime }}</span>
         </div>
       </div>
       <div ref="content"></div>

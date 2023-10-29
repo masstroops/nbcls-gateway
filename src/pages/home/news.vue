@@ -9,14 +9,16 @@
     <div class="flex justify-between">
       <ul class="w-full">
         <li v-for="item in list" class="flex justify-between mb-[18px] cursor-pointer">
+          <a-skeleton :loading="loading">
           <div class="w-[60px] h-[60px] border border-solid border-[#122c67] text-white">
-            <div class="h-[35px] bg-[#122c67] leading-[35px] text-[16px] text-center font-bold">{{ item.date.substr(-2) }}</div>
-            <div class="text-[12px] leading-[25px] text-center text-[#122c67]">{{ item.date.split('-')[0] }}/{{ item.date.split('-')[1] }}</div>
+            <div class="h-[35px] bg-[#122c67] leading-[35px] text-[16px] text-center font-bold">{{ item.addTime.substr(-2) }}</div>
+            <div class="text-[12px] leading-[25px] text-center text-[#122c67]">{{ item.addTime.split('-')[0] }}/{{ item.addTime.split('-')[1] }}</div>
           </div>
           <div class="w-[500px]">
-            <div class="leading-[30px] overflow-hidden text-ellipsis text-black text-[16px] line-clamp-1">{{ item.title }}</div>
-            <div class="leading-[30px] overflow-hidden text-ellipsis text-[#aaa] text-[14px] line-clamp-1">{{ item.title }}</div>
+            <div class="leading-[30px] overflow-hidden text-ellipsis text-black text-[16px] line-clamp-1">{{ item.headline }}</div>
+            <div class="leading-[30px] overflow-hidden text-ellipsis text-[#aaa] text-[14px] line-clamp-1">{{ item.contentText }}</div>
           </div>
+          </a-skeleton>
         </li>
       </ul>
     </div>
@@ -24,15 +26,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { getNewsList } from '@api/news'
 
+interface NoticeItem {
+  title: string;
+  date: string;
+}
 const list = ref<any[]>([
-  { title: '宁波材料所在Janus气凝胶实现季节适应性热管理温度调节方面取得新进展', date: '06-26' },
-  { title: '宁波材料所党委召开会议专题研究分支机构清理整改“回头看”', date: '06-25' },
-  { title: '宁波材料所党委召开会议专题研究分支机构清理整改“回头看”', date: '06-25' },
-  { title: '宁波材料所党委召开会议专题研究分支机构清理整改“回头看”', date: '06-25' },
-  { title: '宁波材料所党委召开会议专题研究分支机构清理整改“回头看”', date: '06-25' },
 ])
+const loading = ref(true)
+onMounted(() => {
+  getList()
+})
+const getList = () => {
+  let params = {
+    type: 6,
+    pageNum: 1,
+    pageSize: 5,
+  }
+  getNewsList(params).then((res:any) => {
+    if (res.code == 200) {
+      loading.value = false
+      list.value = res.rows
+    }
+  })
+}
 </script>
 
 <style lang="less" scoped>

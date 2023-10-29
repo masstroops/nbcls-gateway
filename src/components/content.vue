@@ -9,16 +9,15 @@
         </div>
       </template>
       <div @click="goDetail(item)" v-for="item in list" class="pb-[30px] mb-[30px] border-b border-dashed border-[#ddd] flex">
-        <img :src="item.img" class="w-[200px] h-[120px]" alt="">
+        <img :src="'/prod-api'+item.coverPicture" class="w-[200px] h-[120px]" alt="">
         <div class="ml-[30px] flex-1">
-          <h3 class="text-[20px] line-clamp-1 mb-[30px] cursor-pointer"><span class="font-bold">{{ item.name }}</span></h3>
-          <div class="text-[12px] mt-[15px] text-[#999]">发布时间：{{ item.date }}</div>
+          <h3 class="text-[20px] line-clamp-1 mb-[30px] cursor-pointer"><span class="font-bold">{{ item.headline }}</span></h3>
+          <div class="text-[12px] mt-[15px] text-[#999]">发布时间：{{ item.addTime }}</div>
         </div>
       </div>
       <a-pagination
         v-model:current="current"
         v-model:page-size="pageSize"
-        :pageSizeOptions="['3','5','10','20','30']"
         :total="total"
         :show-total="(total:any) => `共 ${total} 条`"
         @change="onTableChange"
@@ -53,8 +52,9 @@ const onTableChange = (page:any) => {
 const getList = () => {
   loading.value = true
   list.value = []
-  reqFun().then((res:any) => {
-    list.value = res
+  reqFun(current.value).then((res:any) => {
+    list.value = res.rows
+    total.value = res.total
     loading.value = false
   })
 }
@@ -62,7 +62,7 @@ getList()
 
 const router = useRouter()
 const goDetail = (row:any) => {
-  router.push({ name: path, query: {} })
+  router.push({ name: path, query: { headline: row.headline } })
 }
 </script>
 

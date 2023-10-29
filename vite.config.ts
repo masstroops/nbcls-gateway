@@ -29,6 +29,7 @@ export default defineConfig({
       //Method 2 : using path
       "@components": path.resolve(__dirname,"src/components"),
       "@pages": path.resolve(__dirname,"src/pages"),
+      "@api": path.resolve(__dirname,"src/api"),
     }
   },
   css: {
@@ -50,7 +51,13 @@ export default defineConfig({
         target: 'http://1.116.71.30:8989',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
-      }
+      },
+      '/prod-api': {
+        target: 'http://101.34.208.6',
+        // target: 'https://dygx.hdu.edu.cn',
+        ws: false,
+        changeOrigin: true,
+      },
     }
   }
 })

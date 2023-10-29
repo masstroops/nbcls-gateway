@@ -6,14 +6,14 @@
     </div>
     <div class="h-[4px] bg-[#eee] mt-[10px] mb-[30px]"><div class="bg-[#122C67] h-full w-[100px]"></div></div>
 
-    <div class="flex justify-between">
-      <a v-for="item in list" class="" style="width: calc(100% / 3 - 21px);">
-        <img :src="item.img" class="h-[210px]" alt="">
-        <h3 class="text-[16px] leading-[24px] mt-[15px] mb-[20px] font-bold line-clamp-2 h-[48px]">{{ item.name }}</h3>
-        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">价格：{{ item.price }}</div>
-        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">联系人：{{ item.user }}</div>
-        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">电话：{{ item.phone }}</div>
-        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">地址：{{ item.site }}</div>
+    <div class="flex">
+      <a v-for="item in list" class="" style="width: calc(100% / 3 - 21px); margin-right: 20px;">
+        <img :src="'/prod-api'+item.pictureUrl" class="h-[210px]" alt="">
+        <h3 class="text-[16px] leading-[24px] mt-[15px] mb-[20px] font-bold line-clamp-2 h-[48px]">{{ item.assetName }}</h3>
+        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">价格：{{ item.cost }}万元</div>
+        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">联系人：{{ item.realName }}</div>
+        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">电话：{{ item.phonenumber }}</div>
+        <div class="text-[14px] line-clamp-1 text-[#666] mb-[5px]">地址：{{ item.genreCode }}</div>
       </a>
     </div>
   </div>
@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { getRanking } from '@api/instrument'
 
 const list = ref<any[]>([])
 const getList = async () => {
@@ -29,6 +30,11 @@ const getList = async () => {
     { name: '核磁共振质谱仪-化学化工学院', img: (await import('../../assets/img/ts6.jpg')).default, price: 1991977.11, user: '朱**', phone: 1999999999, site: '实验室101室' },
     { name: '全数字化核磁共振谱仪-化学化工学院', img: (await import('../../assets/img/ts6.jpg')).default, price: 5959920.11, user: '朱**', phone: 1999999999, site: '实验室101室' },
   ]
+  getRanking().then((res:any) => {
+    if (res.code == 200) {
+      list.value = (res.data||[]).splice(0, 3)
+    }
+  })
 }
 getList()
 </script>

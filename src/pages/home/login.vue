@@ -1,35 +1,256 @@
 <template>
-  <div class="w-[300px]">
+  <div class="w-[300px] relative">
     <div class="flex justify-between text-[#122c67]">
       <span class="text-[24px] font-bold">预约入口</span>
     </div>
     <div class="h-[4px] bg-[#eee] mt-[10px] mb-[30px]"><div class="bg-[#122C67] h-full w-[100px]"></div></div>
 
-    <div class="flex justify-between">
-      <ul class="w-full">
-        <li v-for="item in list" class="h-[60px] bg-[#f9f9f9] text-[#000] hover:bg-[#f2f7fb] hover:text-[#122c67] p-[15px] flex justify-between items-center mb-[5px] cursor-pointer border border-solid border-[#ddd]">
-          <div class="hover:text-[#122c67] text-[16px] line-clamp-1">{{ item.title }}</div>
-          <right-outlined class="text-[#999]" />
-        </li>
-      </ul>
-    </div>
+    <template v-if="loginSuccess">
+      <div class="inputBox">
+        <img class="inputBox-img" src="@/assets/img/admin.png" alt="">
+        <input v-model="username" type="text" class="inputBox-input" placeholder="请输入用户名">
+      </div>
+      <div class="inputBox">
+        <img class="inputBox-img" src="@/assets/img/password.png" alt="">
+        <input v-model="password" @keyup.enter="login" type="password" class="inputBox-input" placeholder="请输入密码">
+      </div>
+      <div class="box2">
+        <span @click="forgetBtn" class="box2-forget">忘记密码？</span>
+      </div>
+      <button @click="login" :disabled="disabled" class="loginbtn">登录</button>
+      <!-- <div class="box3">
+        还没有帐号？<span @click="register" class="box3-register">去注册>></span>
+      </div> -->
+    </template>
+    <template v-else>
+      <div @click="logout" class="logout"><img src="@/assets/img/logout.png" alt="">退出</div>
+      <img class="userimg" src="@/assets/img/parsePicServlet.jpg" alt="">
+      <div class="realname">{{realName}} 你好!</div>
+      <button @click="houtai" class="loginbtn">进入后台</button>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { RightOutlined } from '@ant-design/icons-vue'
+import { message, notification } from 'ant-design-vue'
+import { login as loginReq, getUser } from '@/api/user'
 
-interface NoticeItem {
-  title: string;
-  link: string;
+const loginSuccess = ref(localStorage.NBCLSAUTH ? false : true)
+const username = ref('')
+const password = ref('')
+const realName = ref<any>(localStorage.realname)
+const disabled = ref(false)
+
+onMounted(() => {
+  
+})
+
+const login = () => {
+  if (!username.value || !password.value) {
+    message.warning('请输入帐号和密码')
+    return
+  }
+  let parameter = {
+    username: username.value,
+    password: password.value
+  }
+  disabled.value = true
+  loginReq(parameter).then(res => {
+    disabled.value = false
+    if (res.code===200) {
+      let token = res.token
+      localStorage['NBCLSAUTH'] = token
+      // window.open(`http://139.196.83.198:89?auth=${token}`)
+      getUser().then(res => {
+        if (res.code===200) {
+          notification.success({
+            message: '欢迎',
+            description: `${res.user.nickName}，欢迎回来`,
+            duration: 2
+          })
+          loginSuccess.value = false
+          localStorage['realname'] = res.user.nickName
+          realName.value = localStorage['realname']
+        }
+      })
+    } else {
+      notification.error({
+        message: '登录失败',
+        description: res.msg
+      })
+    }
+  }).catch(err => {
+    disabled.value = false
+    notification.error({
+      message: '登录失败',
+      description: err.msg
+    })
+  })
 }
-const list = ref<NoticeItem[]>([
-  { title: '仪器平台1', link: '2023-06-26' },
-  { title: '仪器平台2', link: '2023-06-25' },
-])
+
+const forgetBtn = () => {}
+
+const registerVisible = ref(false)
+const register = () => {
+  registerVisible.value = true
+}
+const form = ref()
+const formState = reactive<any>({
+  username: '',
+  password: '',
+})
+const submit = () => {
+  form.value.validateFields().then((values:any) => {
+    console.log(values);
+    
+  }).catch()
+}
+const close = () => {
+  registerVisible.value = false
+}
+const logout = () => {
+  loginSuccess.value = true
+  realName.value = ''
+  localStorage.removeItem('realname')
+  localStorage.removeItem('NBCLSAUTH')
+}
+const houtai = () => {
+  getUser().then((res:any) => {
+    if (res.code === 200) {
+      notification.success({
+        message: '欢迎',
+        description: `${res.user.nickName}，欢迎回来`,
+        duration: 2
+      })
+      console.log(`${import.meta.env.VITE_LOCATION}/casUI?code=${localStorage['NBCLSAUTH']}`);
+      debugger
+      window.open(`${import.meta.env.VITE_LOCATION}/casUI?code=${localStorage['NBCLSAUTH']}`)
+    } else {
+      loginSuccess.value = true
+      notification.error({
+        message: '登录过期',
+        description: res.msg
+      })
+      localStorage.removeItem('NBCLSAUTH')
+    }
+  })
+}
 </script>
 
 <style lang="less" scoped>
+.inputBox {
+  width: 100%;
+  height: 64px;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
 
+  &-img {
+    margin: 0 10px 0 28px;
+    width: 21px;
+  }
+
+  &-input {
+    border: none;
+    outline: none;
+    height: 58px;
+    font-size: 20px;
+    background: #f8f8f8;
+    font-family: Source Han Sans CN;
+    font-weight: 500;
+    line-height: 60px;
+    color: #000;
+    width: 371px;
+    letter-spacing: 2px;
+    opacity: .7;
+    padding: 1px 2px;
+  }
+}
+
+.box2 {
+  line-height: 44px;
+  margin-top: 16px;
+  margin-bottom: 30px;
+  font-size: 14px;
+  color: #2c3e50;
+  text-align: right;
+
+  &-forget {
+    font-size: 16px;
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    color: #0336db;
+    letter-spacing: 4px;
+    cursor: pointer;
+  }
+}
+
+.loginbtn {
+  width: 100%;
+  height: 48px;
+  background: #122c67;
+  border-radius: 6px;
+  font-size: 20px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  line-height: 45px;
+  color: #fff;
+  letter-spacing: 4px;
+  border: 0;
+  cursor: pointer;
+}
+
+.box3 {
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 25px;
+
+  &-register {
+    color: #1890ff;
+    cursor: pointer;
+  }
+}
+
+.userimg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 20px solid #ffffff;
+  margin: 0 auto;
+  display: block;
+  box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.13);
+}
+
+.realname {
+  text-align: center;
+  margin: 10px 0 30px;
+  font-size: 18px;
+  color: #888;
+  user-select: none;
+}
+.logout {
+  background: #122c67;
+  color: #fff;
+  width: 60px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 5px;
+  text-align: center;
+  position: absolute;
+  right: 0px;
+  top: 70px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    margin-right: 3px;
+  }
+}
 </style>

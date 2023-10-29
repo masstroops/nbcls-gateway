@@ -4,10 +4,11 @@
     <h1 class="text-[20px] font-bold mb-[20px]">宁波材料所仪器共享平台</h1>
     <div class="flex justify-between">
       <div class="w-[600px] text-[16px] text-[#666]">
-        <div class="mb-[12px]">通信地址：浙江省宁波市镇海区中官西路1219号</div>
+        <div class="mb-[12px]">联系单位：{{ info.associatedUnit }}</div>
         <div class="mb-[12px]">邮政编码：315201</div>
-        <div class="mb-[12px]">办公地址：浙江省宁波市镇海区中官西路1219号</div>
-        <div class="mb-[12px]">联系电话：0572-88888888</div>
+        <div class="mb-[12px]">办公地址：{{ info.officeAddress }}</div>
+        <div class="mb-[12px]">联系人：{{ info.associate }}</div>
+        <div class="mb-[12px]">技术咨询：{{ info.technicalServiceConsulting }}</div>
       </div>
       <div class="w-[600px] h-[300px]" id="map"></div>
     </div>
@@ -16,10 +17,17 @@
 
 <script setup lang="ts">
 import breadcrumbNav from '@components/breadcrumbNav.vue'
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import { getContact } from '@api/user'
 
+const info = ref<any>({})
 onMounted(() => {
   initMap()
+  getContact().then((res:any) => {
+    if (res.code === 200) {
+      info.value = res.data
+    }
+  })
 })
 const initMap = () => {
   const map = new AMap.Map("map", {
